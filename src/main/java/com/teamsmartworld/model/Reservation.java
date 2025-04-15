@@ -1,4 +1,80 @@
 package com.teamsmartworld.model;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 public class Reservation {
+    private String reservationId;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private Customer customer;
+    private ParkingSpot parkingSpot;
+    private Status status;
+
+    // Constructor
+
+    public Reservation(Customer customer, ParkingSpot parkingSpot, int hours) {
+        this.reservationId = UUID.randomUUID().toString();
+        this.startTime = LocalDateTime.now();
+        this.endTime = startTime.plusHours(hours);
+        this.customer = customer;
+        this.parkingSpot = parkingSpot;
+        this.status = Status.ACTIVE;
+    }
+
+//methods (Getter, Setters and other methods)
+
+    public String getReservationId() {
+        return reservationId;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public ParkingSpot getParkingSpot() {
+        return parkingSpot;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setEndTime(int hours){
+        if (hours <= 0) throw new IllegalArgumentException("Hours should be a positive number");
+        this.endTime = this.endTime.plusHours(hours);
+    }
+
+    public void complete (){
+        this.status = Status.COMPLETED;
+    }
+
+//override
+
+    @Override
+    public String toString() {
+        return """
+                Reservation Details
+                Reservation ID = %s
+                Start Time = %s
+                End Time = %s
+                Parking Spot = %s
+                Customer = %s
+                """ .formatted(
+                        reservationId,
+                        startTime,
+                        endTime,
+                        parkingSpot,
+                        customer);
+    }
 }
+
+
