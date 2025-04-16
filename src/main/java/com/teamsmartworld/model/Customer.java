@@ -21,6 +21,11 @@ public class Customer {
         setVehiclePlateNumber(vehiclePlateNumber);
     }
 
+    public Customer(String name, String phoneNumber, String vehiclePlateNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.vehiclePlateNumber = vehiclePlateNumber;
+    }
 
     //Methods (Getters, setters, toString. more...
 
